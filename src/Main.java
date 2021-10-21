@@ -32,31 +32,31 @@ public class Main {
 
         // time 1 for read
         result = service.accessResource(gosling, monitor, read, myFile);
-        System.out.println("time 1: user " + gosling.getLastName() + " read the file 'myFile.txt' in the monitor '" + monitor.getName() +"'");
+        System.out.printf("time 1st: user %s  %s the file '%s' in the monitor '%s'%n", gosling.getLastName(), read.getName(), myFile.getName(), monitor.getName());
         System.out.println("result: " + result);
         System.out.println("==================");
 
         // time 1 for write
         result = service.accessResource(gosling, monitor, write, myFile);
-        System.out.println("time 1: user " + gosling.getLastName() + " write the file 'myFile.txt' in the monitor '" + monitor.getName() +"'");
+        System.out.printf("time 2nd: user %s  %s the file '%s' in the monitor '%s'%n", gosling.getLastName(), write.getName(), myFile.getName(), monitor.getName());
         System.out.println("result: " + result);
         System.out.println("==================");
 
         // time 2 for write
         result = service.accessResource(gosling, monitor, write, myFile);
-        System.out.println("time 2: user " + gosling.getLastName() + " write the file 'myFile.txt' in the monitor '" + monitor.getName() +"'");
+        System.out.printf("time 3th: user %s  %s the file '%s' in the monitor '%s'%n", gosling.getLastName(), write.getName(), myFile.getName(), monitor.getName());
         System.out.println("result: " + result);
         System.out.println("==================");
 
         // time 3 for write
         result = service.accessResource(gosling, monitor, write, myFile);
-        System.out.println("time 3: user " + gosling.getLastName() + " write the file 'myFile.txt' in the monitor '" + monitor.getName() +"'");
+        System.out.printf("time 4th: user %s  %s the file '%s' in the monitor '%s'%n", gosling.getLastName(), write.getName(), myFile.getName(), monitor.getName());
         System.out.println("result: " + result);
         System.out.println("==================");
 
         // time 2 for read
         result = service.accessResource(gosling, monitor, read, myFile);
-        System.out.println("time 2: user " + gosling.getLastName() + " read the file 'myFile.txt' in the monitor '" + monitor.getName() +"'");
+        System.out.printf("time 5th: user %s  %s the file '%s' in the monitor '%s'%n", gosling.getLastName(), read.getName(), myFile.getName(), monitor.getName());
         System.out.println("result: " + result);
     }
 }

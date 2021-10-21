@@ -5,24 +5,24 @@ import util.Utils;
 public class TripUserMonitor {
     private final User user;
     private final Monitor monitor;
-    private int timesWrong;
+    private int attempt;
 
     public TripUserMonitor(User user, Monitor monitor) {
         this.user = user;
         this.monitor = monitor;
-        this.timesWrong = Utils.TIME_WRONG;
+        this.attempt = Utils.ATTEMPT;
     }
 
     public void resetTimes(){
-        this.timesWrong = Utils.TIME_WRONG;
+        this.attempt = Utils.ATTEMPT;
     }
 
     public boolean checkNoTime(){
-        return timesWrong == 0;
+        return attempt == 0;
     }
 
     public void descTimeWrong(){
-        timesWrong--;
+        attempt--;
     }
 
     public User getUser() {

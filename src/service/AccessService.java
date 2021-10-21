@@ -8,18 +8,17 @@ import java.util.List;
 
 public class AccessService implements AccessServiceInterface{
 
-    private List<TripUserMonitor> tripUserMonitorList = new ArrayList<>();
+    private final List<TripUserMonitor> tripUserMonitorList = new ArrayList<>();
 
     @Override
     public String accessResource(User user, Monitor monitor, Action action, Resource resource) {
         // check
-        TripUserMonitor tmpTripUserMonitor = null;
-        for (TripUserMonitor tripUserMonitor : tripUserMonitorList){
-            if (tripUserMonitor.checkUserAccessMonitor(user, monitor)){
-                tmpTripUserMonitor = tripUserMonitor;
-                break;
-            }
-        }
+        TripUserMonitor tmpTripUserMonitor = tripUserMonitorList
+                .stream()
+                .filter(tripUserMonitor -> tripUserMonitor.checkUserAccessMonitor(user, monitor))
+                .findFirst()
+                .orElse(null);
+
         if (tmpTripUserMonitor == null){
             tmpTripUserMonitor = new TripUserMonitor(user, monitor);
             tripUserMonitorList.add(tmpTripUserMonitor);

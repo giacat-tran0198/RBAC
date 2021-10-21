@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Monitor {
     private String name;
@@ -25,8 +26,8 @@ public class Monitor {
         return new ArrayList<>(roleList);
     }
 
-    public boolean addRole(Role role){
-        return roleList.add(role);
+    public void addRole(Role role){
+        roleList.add(role);
     }
 
     public boolean removeRole(Role role){
@@ -34,19 +35,8 @@ public class Monitor {
     }
 
     public boolean canAccess(User user, Action action, Resource resource){
-        Role role = null;
-
-        // find role
-        for (Role r: roleList){
-            if (r.isUserInRole(user)){
-                role = r;
-                break;
-            }
-        }
-
-        if (role == null) return false;
-
-        return role.isAccess(action, resource);
+        Optional<Role> role = roleList.stream().filter(r -> r.isUserInRole(user)).findFirst();
+        return role.map(value -> value.isAccess(action, resource)).orElse(false);
     }
 
     @Override

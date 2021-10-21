@@ -26,9 +26,9 @@ public class Role {
         return new ArrayList<>(permittedAuthList);
     }
 
-    public boolean addUser(User user) {
-        if (user.isBlocked()) return false;
-        return permittedUsersList.add(user);
+    public void addUser(User user) {
+        if (user.isBlocked()) return;
+        permittedUsersList.add(user);
     }
 
     public boolean removeUser(User user) {
@@ -39,8 +39,8 @@ public class Role {
         return permittedUsersList.contains(user);
     }
 
-    public boolean addAuth(Authorization auth) {
-        return permittedAuthList.add(auth);
+    public void addAuth(Authorization auth) {
+        permittedAuthList.add(auth);
     }
 
     public boolean removeAuth(Authorization auth) {
@@ -48,10 +48,9 @@ public class Role {
     }
 
     public boolean isAccess(Action action, Resource resource) {
-        for (Authorization auth : permittedAuthList) {
-            if (action.equals(auth.getAction()) && resource.equals(auth.getResource())) return true;
-        }
-        return false;
+        return permittedAuthList
+                .stream()
+                .anyMatch(auth -> auth.getAction().equals(action) && auth.getResource().equals(resource));
     }
 
     public void update() {
